@@ -10,11 +10,14 @@ defmodule TasksWeb.Application do
     children = [
       {TasksWeb.Tasks, []},
       {
-        Plug.Pedro.HttpServer, [
-        plug: TasksWeb.Router,
-        port: 4040,
-        options: []
-      ]}
+        Plug.Cowboy,
+        [
+          plug: TasksWeb.Router,
+          port: 4040,
+          scheme: :http,
+          options: []
+        ]
+      }
     ]
 
     opts = [strategy: :one_for_one, name: TasksWeb.Supervisor]

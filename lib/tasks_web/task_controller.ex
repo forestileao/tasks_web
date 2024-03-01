@@ -16,6 +16,22 @@ defmodule TasksWeb.TaskController do
     |> render("tasks.xhtml.eex", tasks: tasks)
   end
 
+  def create(conn, %{"name" => name, "description" => description}) do
+    Tasks.add(name, description)
+
+    conn
+    |> Pedro.Controller.redirect(to: "/tasks")
+  end
+
+  def delete(conn, %{"id" => id}) do
+    id
+    |> String.to_integer()
+    |> Tasks.delete()
+
+    conn
+    |> Pedro.Controller.redirect(to: "/tasks")
+  end
+
   defp render(conn, file, assigns) do
     TaskView.render(conn, file, assigns)
   end

@@ -3,14 +3,36 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-   <%= for {name, description} <- @tasks do %>
+   <%= for {{name, description}, index} <- Enum.with_index(@tasks) do %>
     <tr>
       <td><%= name %></td>
       <td><%= description %></td>
+      <td><a href="/tasks/<%= index %>/delete">Delete</a></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
+<br />
+<hr />
+
+<h1>Add a new task</h1>
+
+<form action="/tasks" method="post">
+  <label for="name">Name</label>
+  <br />
+  <input type="text" id="name" name="name" />
+  <br />
+
+  <label for="description">Description</label>
+  <br />
+  <textarea type="text" id="description" name="description"></textarea>
+  <br />
+  <br />
+
+  <button type="submit">Add task</button>
+</form>

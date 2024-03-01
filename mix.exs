@@ -22,7 +22,8 @@ defmodule TasksWeb.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:pedro, path: "../pedro"}
+      {:pedro, path: "../pedro"},
+      {:plug_cowboy, "~> 2.0"}
     ]
   end
 end
